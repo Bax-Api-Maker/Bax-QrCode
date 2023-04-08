@@ -14,6 +14,10 @@ def make_qr_code(url):
     img_bytes = img_bytes.getvalue()
     return img_bytes
 
+@app.route('/api')
+def get_data():
+    return "API get started"
+
 @app.route('/api/make', methods=['POST'])
 def get_data():
     url = request.form["url"]
