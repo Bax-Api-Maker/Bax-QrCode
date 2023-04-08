@@ -15,15 +15,17 @@ def make_qr_code(url):
     return img_bytes
 
 @app.route('/api')
-def get_data():
+def info():
     return "API get started"
 
 @app.route('/api/make', methods=['POST'])
 def get_data():
-    url = request.form["url"]
-    qrcode = make_qr_code(url)
-    content_type = 'image/png'
-    return send_file(BytesIO(qrcode), mimetype=content_type)
+    try:
+        url = request.form["url"]
+        qrcode = make_qr_code(url)
+        content_type = 'image/png'
+        return send_file(BytesIO(qrcode), mimetype=content_type)
+    except Exception as exp: return str(exp)
 
 if __name__ == "__main__":
     app.run()
