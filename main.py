@@ -21,7 +21,8 @@ def info():
 @app.route('/api/make', methods=['POST'])
 def get_data():
     try:
-        url = request.form["url"]
+        data = request.get_json()
+        url = data['url']
         qrcode = make_qr_code(url)
         content_type = 'image/png'
         return send_file(BytesIO(qrcode), mimetype=content_type)
